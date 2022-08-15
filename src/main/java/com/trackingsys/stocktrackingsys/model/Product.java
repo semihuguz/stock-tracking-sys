@@ -38,4 +38,10 @@ public class Product {
     @NotNull
     @Column(name="stock_status")
     private boolean stockStatus;
+
+   /* @ManyToOne()
+    @JoinColumn(name = "categoryId")
+    private Category category;
+*/
+
 }
