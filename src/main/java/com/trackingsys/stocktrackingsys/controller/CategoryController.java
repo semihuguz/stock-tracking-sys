@@ -24,12 +24,13 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getAllCategories());
 
     }
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getByCategoryId(@PathVariable("id") int categoryId){
         return ResponseEntity.ok(categoryService.getByCategoryId(categoryId));
     }
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public void deletedCategory(@PathVariable("id") int categoryId){
         categoryService.deletedCategory(categoryId);
+
     }
 }
