@@ -32,4 +32,10 @@ public class CategoryService {
         categoryRepository.deleteById(categoryId);
         return category;
     }
+
+    public Category updateCategoryById(Category category, int categoryId) {
+        Category updateCategory = categoryRepository.findById(categoryId).orElse(null);
+        updateCategory.setCategoryName(category.getCategoryName());
+        return categoryRepository.save(updateCategory);
+    }
 }

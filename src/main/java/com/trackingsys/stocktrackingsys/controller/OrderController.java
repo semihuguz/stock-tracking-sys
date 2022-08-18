@@ -35,4 +35,10 @@ public class OrderController {
         orderService.deleteOrderById(orderId);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Order> updateByOrderId(
+            @RequestBody Order order,
+            @PathVariable("id") String orderId){
+        return ResponseEntity.ok(orderService.updateByOrderId(order, orderId));
+    }
 }

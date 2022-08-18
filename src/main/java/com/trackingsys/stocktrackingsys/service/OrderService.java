@@ -32,4 +32,10 @@ public class OrderService {
         orderRepository.deleteById(orderId);
         return order;
     }
+
+    public Order updateByOrderId(Order order, String orderId) {
+        Order updateOrder = orderRepository.findById(orderId).orElse(null);
+        updateOrder.setOrderNumber(order.getOrderNumber());
+        return orderRepository.save(updateOrder);
+    }
 }

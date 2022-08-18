@@ -33,4 +33,15 @@ public class ProductService {
         productRepository.deleteById(productId);
         return product;
     }
+
+    public Product updateProductById(Product product, Long productId) {
+        Product updateProduct = productRepository.findById(productId).orElse(null);
+        updateProduct.setProductName(product.getProductName());
+        updateProduct.setUnitPrice(product.getUnitPrice());
+        updateProduct.setUnitStock(product.getUnitStock());
+        updateProduct.setInventory(product.getInventory());
+
+        return productRepository.save(updateProduct);
+
+    }
 }
