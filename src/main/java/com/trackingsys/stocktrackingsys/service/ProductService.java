@@ -1,6 +1,8 @@
 package com.trackingsys.stocktrackingsys.service;
 
 
+import com.trackingsys.stocktrackingsys.dto.ProductDto;
+import com.trackingsys.stocktrackingsys.dto.converter.ProductDtoConventer;
 import com.trackingsys.stocktrackingsys.model.Product;
 import com.trackingsys.stocktrackingsys.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -10,22 +12,25 @@ import java.util.List;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductDtoConventer productDtoConventer;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductDtoConventer productDtoConventer) {
         this.productRepository = productRepository;
+        this.productDtoConventer = productDtoConventer;
     }
 
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
+    public ProductDto addProduct(Product product) {
+        return productDtoConventer.convertToDto(productRepository.save(product));
 
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAllProducts() {
+        return productDtoConventer.convertToDto(productRepository.findAll());
     }
 
-    public Product getProdutcById(Long productId) {
-        return productRepository.findById(productId).orElse(null);
+    public ProductDto getProdutcById(Long productId) {
+        return productDtoConventer.convertToDto(productRepository.findById(productId)
+                .orElse(null));
     }
 
     public Product deleteProduct(Long productId) {
@@ -34,14 +39,14 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProductById(Product product, Long productId) {
+    public ProductDto updateProductById(Product product, Long productId) {
         Product updateProduct = productRepository.findById(productId).orElse(null);
         updateProduct.setProductName(product.getProductName());
         updateProduct.setUnitPrice(product.getUnitPrice());
         updateProduct.setUnitStock(product.getUnitStock());
         updateProduct.setInventory(product.getInventory());
 
-        return productRepository.save(updateProduct);
+        return productDtoConventer.convertToDto(productRepository.save(updateProduct));
 
     }
 }
