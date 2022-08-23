@@ -1,8 +1,9 @@
 package com.trackingsys.stocktrackingsys.service;
 
+import com.trackingsys.stocktrackingsys.dto.OrderDto;
+import com.trackingsys.stocktrackingsys.dto.converter.OrderConverterDto;
 import com.trackingsys.stocktrackingsys.model.Order;
 import com.trackingsys.stocktrackingsys.repository.OrderRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,21 +11,23 @@ import java.util.List;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderConverterDto orderConverterDto;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderConverterDto orderConverterDto) {
         this.orderRepository = orderRepository;
+        this.orderConverterDto = orderConverterDto;
     }
 
-    public Order addOrder(Order order) {
-        return orderRepository.save(order);
+    public OrderDto addOrder(Order order) {
+        return orderConverterDto.converterDto(orderRepository.save(order));
     }
 
-    public List<Order> getAllOrder() {
-        return orderRepository.findAll();
+    public List<OrderDto> getAllOrder() {
+        return orderConverterDto.converterDto(orderRepository.findAll());
     }
 
-    public Order getOrderById(String orderId) {
-        return orderRepository.findById(orderId).orElse(null);
+    public OrderDto getOrderById(String orderId) {
+        return orderConverterDto.converterDto(orderRepository.findById(orderId).orElse(null));
     }
 
     public Order deleteOrderById(String orderId) {
@@ -33,9 +36,9 @@ public class OrderService {
         return order;
     }
 
-    public Order updateByOrderId(Order order, String orderId) {
+    public OrderDto updateByOrderId(Order order, String orderId) {
         Order updateOrder = orderRepository.findById(orderId).orElse(null);
         updateOrder.setOrderNumber(order.getOrderNumber());
-        return orderRepository.save(updateOrder);
+        return orderConverterDto.converterDto(orderRepository.save(updateOrder));
     }
 }

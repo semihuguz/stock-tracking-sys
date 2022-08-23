@@ -1,9 +1,6 @@
 package com.trackingsys.stocktrackingsys.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
@@ -14,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "category")
 public class Category {
 

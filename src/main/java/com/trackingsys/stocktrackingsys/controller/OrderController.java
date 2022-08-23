@@ -1,5 +1,6 @@
 package com.trackingsys.stocktrackingsys.controller;
 
+import com.trackingsys.stocktrackingsys.dto.OrderDto;
 import com.trackingsys.stocktrackingsys.model.Order;
 import com.trackingsys.stocktrackingsys.service.OrderService;
 import org.springframework.http.RequestEntity;
@@ -19,11 +20,11 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> addOrder(@RequestBody Order order){
+    public ResponseEntity<OrderDto> addOrder(@RequestBody Order order){
         return ResponseEntity.ok(orderService.addOrder(order));
     }
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrder(){
+    public ResponseEntity<List<OrderDto>> getAllOrder(){
         return ResponseEntity.ok(orderService.getAllOrder());
     }
     @GetMapping("/{id}")

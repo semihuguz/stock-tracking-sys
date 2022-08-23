@@ -1,5 +1,6 @@
 package com.trackingsys.stocktrackingsys.controller;
 
+import com.trackingsys.stocktrackingsys.dto.CategoryDto;
 import com.trackingsys.stocktrackingsys.model.Category;
 import com.trackingsys.stocktrackingsys.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,16 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @PostMapping
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
+    public ResponseEntity<CategoryDto> addCategory(@RequestBody Category category){
         return ResponseEntity.ok(categoryService.addCategory(category));
     }
     @GetMapping
-    public ResponseEntity<List<Category>> getAllCategories(){
+    public ResponseEntity<List<CategoryDto>> getAllCategories(){
         return ResponseEntity.ok(categoryService.getAllCategories());
 
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getByCategoryId(@PathVariable("id") int categoryId){
+    public ResponseEntity<CategoryDto> getByCategoryId(@PathVariable("id") int categoryId){
         return ResponseEntity.ok(categoryService.getByCategoryId(categoryId));
     }
     @DeleteMapping("/{id}")
@@ -34,7 +35,7 @@ public class CategoryController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategoryById(
+    public ResponseEntity<CategoryDto> updateCategoryById(
             @RequestBody Category category,
             @PathVariable("id") int categoryId){
         return ResponseEntity.ok(categoryService.updateCategoryById(category, categoryId));
