@@ -16,8 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "customer")
 public class Customer extends User {
-    @Id
-    @NotNull
+
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(strategy ="UUID", name = "org.hibernate.id.UUIDGenerator")
     @Column(name = "customerId")
